@@ -1,0 +1,36 @@
+<div class="w3-container w3-padding w3-round w3-center w3-light-blue w3-margin w3-card-2">
+    <h1>Todo Lists</h1>
+</div>
+<div class="w3-container">
+    <a href="/add" class="w3-btn w3-blue w3-right w3-round">Add a New Note</a>
+</div>
+{{> _msg}} {{#each allNotes}}
+<div class="w3-container w3-sand w3-margin w3-round w3-padding">
+    <h3>Title : {{title}}</h3>
+    <div id="{{title}}" class="w3-accordion-content">
+        <p>Body : {{body}}</p>
+    </div>
+    <button onclick="myFunc('{{title}}')" class="w3-btn w3-blue w3-round w3-small w3-third w3-margin-2">Read</button>
+    <form action="remove/{{title}}?_method=DELETE" method="post">
+        <input type="hidden" name="_method" value="DELETE">
+        <input type="submit" value="Remove" class="w3-btn w3-red w3-round w3-small w3-right w3-third ">
+    </form>
+</div>
+{{else}}
+<div class="w3-container">
+    <p>No notes added</p>
+</div>
+{{/each}}
+
+<script>
+    function myFunc(id) {
+        document.getElementById(id).classList.toggle("w3-show");
+        if (document.getElementById(id).nextElementSibling.innerHTML === "Read")
+        {
+            document.getElementById(id).nextElementSibling.innerHTML = "Hide";
+        } else
+        {
+            document.getElementById(id).nextElementSibling.innerHTML = "Read";
+        }
+    }
+</script>
